@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ -d "build" ]; then
+	cd build
+	make
+	cd ..
+else 
+	package-configure
+	cd build
+	make
+	cd ..
+fi
