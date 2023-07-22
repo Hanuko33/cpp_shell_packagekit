@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pmake
+clear
+./build/$PACKAGE_NAME

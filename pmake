@@ -4,7 +4,7 @@ if [ -d "build" ]; then
 	make
 	cd ..
 else 
-	package-configure
+	pconfigure
 	cd build
 	make
 	cd ..
