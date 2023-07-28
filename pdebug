@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pmake
+cgdb ./build/$PACKAGE_NAME
