@@ -1,11 +1,11 @@
 #!/bin/bash
 if [ -d "build" ]; then
 	cd build
-	make
+	make -j `nproc`
 	cd ..
 else 
 	pconfigure
 	cd build
-	make
+	make -j `nproc`
 	cd ..
 fi
