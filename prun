@@ -1,4 +1,4 @@
 #!/bin/bash
 
 pmake
-./build/$PACKAGE_NAME
+./build/`cat PACKAGE_NAME`
