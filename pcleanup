@@ -1,2 +1,28 @@
 #!/bin/bash
-rm -r build
+#
+#
+#
+#
+#
+
+RED="\e[31m"
+NOCOLOR="\e[0m"
+CYAN="\e[36m"
+if [ -f PACKAGE_NAME ]
+then
+    if [ -d build ]
+    then
+        echo -e "Are you sure? (y/n): "
+        read yon
+        if [ $yon == "y" ]
+        then 
+            echo -e "[`cat PACKAGE_NAME`] ${CYAN}Cleaning Up${NOCOLOR}"
+            rm -r build
+            echo -e "[`cat PACKAGE_NAME`] ${CYAN}Cleaning Up: DONE${NOCOLOR}"
+        fi
+        else
+            echo -e "[`cat PACKAGE_NAME`] ${RED}ERROR${NOCOLOR}: No build directory found"
+    fi
+else
+    echo -e "${RED}ERROR${NOCOLOR}: No package found"
+fi

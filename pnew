@@ -1,0 +1,23 @@
+#!/bin/bash
+
+RED="\e[31m"
+NOCOLOR="\e[0m"
+CYAN="\e[36m"
+
+echo "Name of package: "
+read name
+if [ -d $name ]
+then
+    echo -e "${RED}Package already exists! ($name)"
+else
+    echo -e "[$name] ${CYAN} Creating package: Starting${NOCOLOR}"
+    echo -e "[$name] ${CYAN} Creating directory${NOCOLOR}"
+    mkdir $name
+    echo -e "[$name] ${CYAN} Entering directory${NOCOLOR}"
+    cd $name
+    echo -e "[$name] ${CYAN} Initializing git${NOCOLOR}"
+    git init
+    echo -e "[$name] ${CYAN} Initializing package${NOCOLOR}"
+    echo $name > PACKAGE_NAME
+    echo -e "[$name] ${CYAN} Creating package: Done${NOCOLOR}"
+fi

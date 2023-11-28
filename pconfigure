@@ -1,6 +1,36 @@
 #!/bin/bash
-rm -r build
-mkdir build
-cd build
-cmake ..
-cd ..
+
+
+
+RED="\e[31m"
+NOCOLOR="\e[0m"
+CYAN="\e[36m"
+
+
+if [ -f PACKAGE_NAME ]
+then
+    if [ -d build ]
+    then
+        echo -e "${RED}pconfigure: build directory already exist, reconfigure? (y/n) :${NOCOLOR} "
+        read yon
+        if [ $yon == "y" ]
+        then
+            echo -e "[`cat PACKAGE_NAME`] ${CYAN}Config: Starting${NOCOLOR}"
+            rm -r build
+            mkdir build
+            cd build
+            cmake ..
+            cd ..
+            echo -e "[`cat PACKAGE_NAME`] ${CYAN}Config: Done${NOCOLOR}"
+        fi
+    else
+        echo -e "[`cat PACKAGE_NAME`] ${CYAN}Config: Starting${NOCOLOR}"
+        mkdir build
+        cd build
+        cmake ..
+        cd ..
+        echo -e "[`cat PACKAGE_NAME`] ${CYAN}Config: Done${NOCOLOR}"
+    fi
+else
+    echo -e "${RED} No package found!"
+fi

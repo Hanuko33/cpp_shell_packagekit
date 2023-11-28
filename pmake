@@ -1,11 +1,30 @@
 #!/bin/bash
-if [ -d "build" ]; then
-	cd build
-	make -j `nproc`
-	cd ..
-else 
-	pconfigure
-	cd build
-	make -j `nproc`
-	cd ..
+
+RED="\e[31m"
+NOCOLOR="\e[0m"
+CYAN="\e[36m"
+
+if [ -f PACKAGE_NAME ]
+then
+    if [ -d "build" ]; then
+        echo -e "[`cat PACKAGE_NAME`] ${CYAN}Build: Starting${NOCOLOR}"
+        cd build
+        make -j `nproc`
+        cd ..
+        echo -e "[`cat PACKAGE_NAME`] ${CYAN}Build: Done${NOCOLOR}"
+    else 
+        echo -e "[`cat PACKAGE_NAME`] ${RED}No config files found, generate config? (y/n): "
+        read yon
+        if [ $yon == "y" ]
+        then
+            pconfigure
+            echo -e "[`cat PACKAGE_NAME`] ${CYAN}Build: Starting${NOCOLOR}"
+            cd build
+            make -j `nproc`
+            cd ..
+            echo -e "[`cat PACKAGE_NAME`] ${CYAN}Build: Done${NOCOLOR}"
+        fi
+    fi
+else
+    echo -e "${RED} No package found!"
 fi

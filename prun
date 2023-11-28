@@ -1,4 +1,15 @@
 #!/bin/bash
 
-pmake
-./build/`cat PACKAGE_NAME`
+RED="\e[31m"
+NOCOLOR="\e[0m"
+CYAN="\e[36m"
+
+if [ -r PACKAGE_NAME ]
+then
+    pmake
+    echo -e "[`cat PACKAGE_NAME`] ${CYAN}Run: Starting${NOCOLOR}"
+    ./build/`cat PACKAGE_NAME`
+    echo -e "[`cat PACKAGE_NAME`] ${CYAN}Run: Done${NOCOLOR}"
+else 
+    echo -e "${RED} No package found!"
+fi
