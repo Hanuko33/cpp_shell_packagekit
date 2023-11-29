@@ -11,5 +11,5 @@ then
     ./build/`cat PACKAGE_NAME`
     echo -e "[`cat PACKAGE_NAME`] ${CYAN}Run: Done${NOCOLOR}"
 else 
-    echo -e "${RED} No package found!"
+    echo -e "${RED} No package found!${NOCOLOR}"
 fi

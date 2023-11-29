@@ -19,5 +19,80 @@ else
     git init
     echo -e "[$name] ${CYAN} Initializing package${NOCOLOR}"
     echo $name > PACKAGE_NAME
+    echo -e "[$name] ${CYAN} Do you want to include sdl2? (y/n):${NOCOLOR}"
+    read yon
+    if [ $yon == "y" ]
+    then
+        echo -e "${CYAN} C or C++? (c/c++): ${NOCOLOR}"
+        read corcpp
+        if [ $corcpp == "c" ]
+        then
+        echo -e '#include <stdio.h>
+int main()
+{
+    printf("Hi package!");
+}
+        ' > main.c
+        echo -e "cmake_minimum_required(VERSION 3.10)
+project($name)
+find_package(PkgConfig)
+pkg_check_modules(SDL sdl2)
+pkg_check_modules(SDL2_IMAGE SDL2_image >=2.0.0)
+pkg_check_modules(SDL2_GFX SDL2_gfx)
+pkg_check_modules(SDL2_TTF SDL2_ttf)
+set(CMAKE_BUILD_TYPE Debug)
+add_executable($name main.c)
+target_link_libraries($name
+    SDL2 SDL2_gfx SDL2_image SDL2_ttf
+    "'${SDL_LDFLAGS}'" -lm)" > CMakeLists.txt
+        else
+            echo -e '#include <iostream>
+using namespace std;
+int main()
+{
+    cout << "Hi package!";
+}
+' > main.cpp
+            echo -e "cmake_minimum_required(VERSION 3.10)
+project($name)
+find_package(PkgConfig)
+pkg_check_modules(SDL sdl2)
+pkg_check_modules(SDL2_IMAGE SDL2_image >=2.0.0)
+pkg_check_modules(SDL2_GFX SDL2_gfx)
+pkg_check_modules(SDL2_TTF SDL2_ttf)
+set(CMAKE_BUILD_TYPE Debug)
+add_executable($name main.cpp)
+target_link_libraries($name
+    SDL2 SDL2_gfx SDL2_image SDL2_ttf
+    "'${SDL_LDFLAGS}'" -lm)" > CMakeLists.txt
+        fi
+    else
+        echo -e "${CYAN} C or C++? (c/c++): ${NOCOLOR}"
+        read corcpp
+        if [ $corcpp == "c" ]
+        then
+        echo -e '#include <stdio.h>
+int main()
+{
+    printf("Hi package!");
+}
+        ' > main.c
+        echo -e "cmake_minimum_required(VERSION 3.10)
+project($name)
+add_executable($name main.c)" > CMakeLists.txt
+        else
+            echo -e '#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Hi package!";
+}' > main.cpp
+echo -e "cmake_minimum_required(VERSION 3.10)
+project($name)
+add_executable($name main.cpp)
+" > CMakeLists.txt
+        fi
+    fi
     echo -e "[$name] ${CYAN} Creating package: Done${NOCOLOR}"
 fi

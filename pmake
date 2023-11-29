@@ -13,7 +13,7 @@ then
         cd ..
         echo -e "[`cat PACKAGE_NAME`] ${CYAN}Build: Done${NOCOLOR}"
     else 
-        echo -e "[`cat PACKAGE_NAME`] ${RED}No config files found, generate config? (y/n): "
+        echo -e "[`cat PACKAGE_NAME`] ${RED}No config files found, generate config? (y/n):${NOCOLOR} "
         read yon
         if [ $yon == "y" ]
         then
