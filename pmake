@@ -26,5 +26,5 @@ then
         fi
     fi
 else
-    echo -e "${RED} No package found!"
+    echo -e "${RED} No package found!${NOCOLOR}"
 fi
