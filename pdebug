@@ -1,4 +1,4 @@
 #!/bin/bash
 
 pmake
-cgdb ./build/$PACKAGE_NAME
+cgdb ./build/`cat PACKAGE_NAME`

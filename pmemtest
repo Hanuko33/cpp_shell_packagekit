@@ -1,4 +1,4 @@
 #!/bin/bash
 
 pmake
-valgrind ./build/$PACKAGE_NAME
+valgrind ./build/`cat PACKAGE_NAME`
