@@ -4,27 +4,25 @@ RED="\e[31m"
 NOCOLOR="\e[0m"
 CYAN="\e[36m"
 
-if [ -f PACKAGE_NAME ]
-then
-    if [ -d "build" ]; then
-        echo -e "[`cat PACKAGE_NAME`] ${CYAN}Build: Starting${NOCOLOR}"
+wholedir="$(pwd)"
+dirname="$(basename $wholedir)"
+
+if [ -d "build" ]; then
+    echo -e "[] ${CYAN}Build: Starting${NOCOLOR}"
+    cd build
+    make -j `nproc`
+    cd ..
+    echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
+else 
+    echo -e "[$dirname] ${RED}No config files found, generate config? (y/n):${NOCOLOR} "
+    read yon
+    if [ $yon == "y" ]
+    then
+        pconfigure
+        echo -e "[$dirname] ${CYAN}Build: Starting${NOCOLOR}"
         cd build
         make -j `nproc`
         cd ..
-        echo -e "[`cat PACKAGE_NAME`] ${CYAN}Build: Done${NOCOLOR}"
-    else 
-        echo -e "[`cat PACKAGE_NAME`] ${RED}No config files found, generate config? (y/n):${NOCOLOR} "
-        read yon
-        if [ $yon == "y" ]
-        then
-            pconfigure
-            echo -e "[`cat PACKAGE_NAME`] ${CYAN}Build: Starting${NOCOLOR}"
-            cd build
-            make -j `nproc`
-            cd ..
-            echo -e "[`cat PACKAGE_NAME`] ${CYAN}Build: Done${NOCOLOR}"
-        fi
+        echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
     fi
-else
-    echo -e "${RED} No package found!${NOCOLOR}"
 fi

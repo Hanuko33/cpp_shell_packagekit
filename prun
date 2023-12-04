@@ -4,12 +4,9 @@ RED="\e[31m"
 NOCOLOR="\e[0m"
 CYAN="\e[36m"
 
-if [ -r PACKAGE_NAME ]
-then
-    pmake
-    echo -e "[`cat PACKAGE_NAME`] ${CYAN}Run: Starting${NOCOLOR}"
-    ./build/`cat PACKAGE_NAME`
-    echo -e "[`cat PACKAGE_NAME`] ${CYAN}Run: Done${NOCOLOR}"
-else 
-    echo -e "${RED} No package found!${NOCOLOR}"
-fi
+pmake
+wholedir="$(pwd)"
+dirname="$(basename $wholedir)"
+echo -e "[$dirname] ${CYAN}Run: Starting${NOCOLOR}"
+./build/$dirname
+echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"

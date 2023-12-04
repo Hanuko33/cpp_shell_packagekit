@@ -1,4 +1,6 @@
 #!/bin/bash
 
+wholedir="$(pwd)"
+dirname="$(basename $wholedir)"
 pmake
-valgrind ./build/`cat PACKAGE_NAME`
+valgrind ./build/$dirname

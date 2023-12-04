@@ -17,8 +17,6 @@ else
     cd $name
     echo -e "[$name] ${CYAN} Initializing git${NOCOLOR}"
     git init
-    echo -e "[$name] ${CYAN} Initializing package${NOCOLOR}"
-    echo $name > PACKAGE_NAME
     echo -e "[$name] ${CYAN} Do you want to include sdl2? (y/n):${NOCOLOR}"
     read yon
     if [ $yon == "y" ]
