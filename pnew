@@ -4,8 +4,14 @@ RED="\e[31m"
 NOCOLOR="\e[0m"
 CYAN="\e[36m"
 
-echo "Name of package: "
-read name
+if [ -z $1 ]
+then
+    echo "Name of package: "
+    read name
+else
+    name=$1
+fi
+
 if [ -d $name ]
 then
     echo -e "${RED}Package already exists! ($name)"
@@ -94,3 +100,4 @@ add_executable($name main.cpp)
     fi
     echo -e "[$name] ${CYAN} Creating package: Done${NOCOLOR}"
 fi
+
