@@ -42,12 +42,11 @@ project($name)
 find_package(PkgConfig)
 pkg_check_modules(SDL sdl2)
 pkg_check_modules(SDL2_IMAGE SDL2_image)
-pkg_check_modules(SDL2_GFX SDL2_gfx)
 pkg_check_modules(SDL2_TTF SDL2_ttf)
 set(CMAKE_BUILD_TYPE Debug)
 add_executable($name main.c)
 target_link_libraries($name
-    SDL2 SDL2_gfx SDL2_image SDL2_ttf
+    SDL2 SDL2_image SDL2_ttf
     "'${SDL_LDFLAGS}'" -lm)" > CMakeLists.txt
         else
             echo -e '#include <iostream>
@@ -62,12 +61,11 @@ project($name)
 find_package(PkgConfig)
 pkg_check_modules(SDL sdl2)
 pkg_check_modules(SDL2_IMAGE SDL2_image)
-pkg_check_modules(SDL2_GFX SDL2_gfx)
 pkg_check_modules(SDL2_TTF SDL2_ttf)
 set(CMAKE_BUILD_TYPE Debug)
 add_executable($name main.cpp)
 target_link_libraries($name
-    SDL2 SDL2_gfx SDL2_image SDL2_ttf
+    SDL2 SDL2_image SDL2_ttf
     "'${SDL_LDFLAGS}'" -lm)" > CMakeLists.txt
         fi
     else
@@ -98,6 +96,7 @@ add_executable($name main.cpp)
 " > CMakeLists.txt
         fi
     fi
+    echo "build" > .gitignore
     echo -e "[$name] ${CYAN} Creating package: Done${NOCOLOR}"
 fi
 
