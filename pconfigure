@@ -9,7 +9,7 @@ CYAN="\e[36m"
 wholedir="$(pwd)"
 dirname="$(basename $wholedir)"
 
-if [ -d build ]
+if [ -f build/Makefile ]
 then
     echo -e "${RED}pconfigure: build directory already exist, reconfigure? (y/n) :${NOCOLOR} "
     read yon

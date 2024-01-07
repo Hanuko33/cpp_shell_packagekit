@@ -7,7 +7,7 @@ CYAN="\e[36m"
 wholedir="$(pwd)"
 dirname="$(basename $wholedir)"
 
-if [ -d "build" ]; then
+if [ -f "build/Makefile" ]; then
     echo -e "[] ${CYAN}Build: Starting${NOCOLOR}"
     cd build
     make -j `nproc`
