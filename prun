@@ -10,4 +10,3 @@ dirname="$(basename $wholedir)"
 echo -e "[$dirname] ${CYAN}Run: Starting${NOCOLOR}"
 ./build/$dirname
 echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
-read
