@@ -7,6 +7,11 @@ CYAN="\e[36m"
 wholedir="$(pwd)"
 dirname="$(basename $wholedir)"
 
+
+if [ -f go ]
+then
+go build -o $dirname main.go
+else
 if [ -f "build/Makefile" ]; then
     echo -e "[] ${CYAN}Build: Starting${NOCOLOR}"
     cd build
@@ -25,4 +30,5 @@ else
         cd ..
         echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
     fi
+fi
 fi

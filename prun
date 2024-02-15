@@ -8,5 +8,10 @@ pmake
 wholedir="$(pwd)"
 dirname="$(basename $wholedir)"
 echo -e "[$dirname] ${CYAN}Run: Starting${NOCOLOR}"
-./build/$dirname
+if [ -f go ]
+then
+    ./$dirname
+else
+    ./build/$dirname
+fi
 echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
