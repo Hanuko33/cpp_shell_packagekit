@@ -7,6 +7,19 @@ CYAN="\e[36m"
 wholedir="$(pwd)"
 dirname="$(basename $wholedir)"
 
+if [ -f go ]
+then
+    echo -e "Are you sure? (y/n): "
+    read yon
+    if [ $yon == "y" ]
+    then 
+        echo -e "[$dirname] ${CYAN}Cleaning Up${NOCOLOR}"
+        rm $dirname
+        echo -e "[$dirname] ${CYAN}Cleaning Up: DONE${NOCOLOR}"
+        exit
+    fi
+fi
+
 if [ -d build ]
 then
     echo -e "Are you sure? (y/n): "
@@ -17,6 +30,6 @@ then
         rm -r build
         echo -e "[$dirname] ${CYAN}Cleaning Up: DONE${NOCOLOR}"
     fi
-    else
-        echo -e "[$dirname] ${RED}ERROR${NOCOLOR}: No build directory found"
+else
+    echo -e "[$dirname] ${RED}ERROR${NOCOLOR}: No build directory found"
 fi
