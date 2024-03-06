@@ -4,14 +4,18 @@ RED="\e[31m"
 NOCOLOR="\e[0m"
 CYAN="\e[36m"
 
-pmake
 wholedir="$(pwd)"
 dirname="$(basename $wholedir)"
 echo -e "[$dirname] ${CYAN}Run: Starting${NOCOLOR}"
-if [ -f go ]
+if [ -f rust ]
+then 
+    cargo run
+elif [ -f go ]
 then
+    pmake
     ./$dirname
 else
+    pmake
     ./build/$dirname
 fi
 echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
