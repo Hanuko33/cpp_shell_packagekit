@@ -1,0 +1,27 @@
+#!/bin/bash
+
+RED="\e[31m"
+NOCOLOR="\e[0m"
+CYAN="\e[36m"
+
+if [ -z $1 ]
+then
+    echo "Name of rust package: "
+    read name
+else
+    name=$1
+fi
+
+if [ -d $name ]
+then
+    echo -e "${RED}Package already exists! ($name)"
+else
+    echo -e "[$name] ${CYAN} Creating package: Starting${NOCOLOR}"
+    echo -e "[$name] ${CYAN} Creating cargo package${NOCOLOR}"
+    cargo new $name
+    
+    echo -e "[$name] ${CYAN} Entering directory${NOCOLOR}"
+    cd $name/src
+    touch rust
+    echo -e "[$name] ${CYAN} Creating package: Done${NOCOLOR}"
+fi
