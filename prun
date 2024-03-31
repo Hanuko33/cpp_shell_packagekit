@@ -12,12 +12,14 @@ echo -e "[$dirname] ${CYAN}Run: Starting${NOCOLOR}"
 if [ -f PCUSTOM ]
 then
     ./`cat PCUSTOM`
+    echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
     exit
 fi
 
 if [ -f rust ]
 then 
     cargo run
+    echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
     exit 
 fi
 
