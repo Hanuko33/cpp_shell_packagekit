@@ -10,7 +10,10 @@ dirname="$(basename $wholedir)"
 
 if [ -f go ]
 then
+rm $dirname
+    echo -e "[] ${CYAN}Build: Starting${NOCOLOR}"
 go build -o $dirname main.go
+    echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
 else
 if [ -f "build/Makefile" ]; then
     echo -e "[] ${CYAN}Build: Starting${NOCOLOR}"

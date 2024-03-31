@@ -6,16 +6,36 @@ CYAN="\e[36m"
 
 wholedir="$(pwd)"
 dirname="$(basename $wholedir)"
+
 echo -e "[$dirname] ${CYAN}Run: Starting${NOCOLOR}"
+
+if [ -f PCUSTOM ]
+then
+    ./`cat PCUSTOM`
+    exit
+fi
+
 if [ -f rust ]
 then 
     cargo run
-elif [ -f go ]
-then
-    pmake
-    ./$dirname
-else
-    pmake
-    ./build/$dirname
+    exit 
 fi
+
+pmake
+if [ -z $1 ]
+then
+    filename=$dirname
+else
+    filename=$1
+fi
+
+if [ -f go ]
+then
+    directory=.
+else
+    directory=./build
+fi
+
+$directory/$filename
+
 echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
