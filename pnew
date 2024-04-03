@@ -27,7 +27,7 @@ else
     read yon
     if [ $yon == "y" ]
     then
-        echo -e "${CYAN} C or C++? (c/c++): ${NOCOLOR}"
+        echo -e "${CYAN}C or C++? (c/c++): ${NOCOLOR}"
         read corcpp
         if [ $corcpp == "c" ]
         then
