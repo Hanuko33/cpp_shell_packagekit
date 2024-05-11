@@ -10,15 +10,30 @@ dirname="$(basename $wholedir)"
 
 if [ -f go ]
 then
-rm $dirname
+    if [ -f $dirname ]
+    then
+        rm $dirname
+    fi
     echo -e "[] ${CYAN}Build: Starting${NOCOLOR}"
-go build -o $dirname main.go
+    go build -o $dirname main.go
+    
+    if (( $? > 0 ))
+    then
+        echo -e "[$dirname] ${RED}Build: Failed${NOCOLOR}"
+        exit 1
+    fi
+
     echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
 else
 if [ -f "build/Makefile" ]; then
     echo -e "[] ${CYAN}Build: Starting${NOCOLOR}"
     cd build
     make -j `nproc`
+    if (( $? > 0 ))
+    then
+        echo -e "[$dirname] ${RED}Build: Failed${NOCOLOR}"
+        exit 1
+    fi
     cd ..
     echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
 else 
@@ -30,6 +45,11 @@ else
         echo -e "[$dirname] ${CYAN}Build: Starting${NOCOLOR}"
         cd build
         make -j `nproc`
+        if (( $? > 0 ))
+        then
+            echo -e "[$dirname] ${RED}Build: Failed${NOCOLOR}"
+            exit 1
+        fi
         cd ..
         echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
     fi

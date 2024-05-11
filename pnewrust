@@ -19,6 +19,12 @@ else
     echo -e "[$name] ${CYAN} Creating package: Starting${NOCOLOR}"
     echo -e "[$name] ${CYAN} Creating cargo package${NOCOLOR}"
     cargo new $name
+
+    if (( $? > 0 ))
+    then
+        echo -e "[$name] ${RED} Creating package: FAILED${NOCOLOR}"
+        exit
+    fi
     
     echo -e "[$name] ${CYAN} Entering directory${NOCOLOR}"
     cd $name/src

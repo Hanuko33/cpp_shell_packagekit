@@ -19,11 +19,21 @@ fi
 if [ -f rust ]
 then 
     cargo run
+    if (( $? > 0 ))
+    then
+        echo -e "[$dirname] ${RED}Run: FAILED${NOCOLOR}"
+        exit
+    fi
     echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
     exit 
 fi
 
 pmake
+
+if (( $? > 0 ))
+then
+    exit
+fi
 if [ -z $1 ]
 then
     filename=$dirname
