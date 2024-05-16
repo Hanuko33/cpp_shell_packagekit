@@ -14,7 +14,7 @@ then
     then
         rm $dirname
     fi
-    echo -e "[] ${CYAN}Build: Starting${NOCOLOR}"
+    echo -e "[$dirname] ${CYAN}Build: Starting${NOCOLOR}"
     go build -o $dirname main.go
     
     if (( $? > 0 ))
@@ -24,9 +24,34 @@ then
     fi
 
     echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
+elif [ -f asm ]
+then
+    if [ -f $dirname ]
+    then
+        rm $dirname
+    fi
+    echo -e "[$dirname] ${CYAN}Build: Starting${NOCOLOR}"
+    as $dirname.s
+
+    if (( $? > 0 ))
+    then
+        echo -e "[$dirname] ${RED}Build: Failed on assembling${NOCOLOR}"
+        exit 1
+    fi
+
+    ld -o $dirname a.out -nostdlib -static
+
+    if (( $? > 0 ))
+    then
+        echo -e "[$dirname] ${RED}Build: Failed on linking${NOCOLOR}"
+        exit 1
+    fi
+    rm a.out
+    echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
+
 else
 if [ -f "build/Makefile" ]; then
-    echo -e "[] ${CYAN}Build: Starting${NOCOLOR}"
+    echo -e "[$dirname] ${CYAN}Build: Starting${NOCOLOR}"
     cd build
     make -j `nproc`
     if (( $? > 0 ))
