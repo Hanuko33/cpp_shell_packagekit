@@ -15,8 +15,9 @@ echo -e "--------------------------------------------------------"
 if [ -f PCUSTOM ]
 then
     ./`cat PCUSTOM`
+    code=$?
     echo -e "--------------------------------------------------------"
-    echo -e "[$dirname] ${GRAY}Program exited with code: $?${NOCOLOR}"
+    echo -e "[$dirname] ${GRAY}Program exited with code: ${code}${NOCOLOR}"
     echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
     echo -e "--------------------------------------------------------"
     exit
@@ -61,7 +62,8 @@ fi
 
 $directory/$filename
 
+code=$?
 echo -e "--------------------------------------------------------"
-echo -e "[$dirname] ${GRAY}Program exited with code: $?${NOCOLOR}"
+echo -e "[$dirname] ${GRAY}Program exited with code: ${code}${NOCOLOR}"
 echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
 echo -e "--------------------------------------------------------"
