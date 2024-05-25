@@ -3,16 +3,22 @@
 RED="\e[31m"
 NOCOLOR="\e[0m"
 CYAN="\e[36m"
+GRAY="\e[30m"
 
 wholedir="$(pwd)"
 dirname="$(basename $wholedir)"
 
+echo -e "--------------------------------------------------------"
 echo -e "[$dirname] ${CYAN}Run: Starting${NOCOLOR}"
+echo -e "--------------------------------------------------------"
 
 if [ -f PCUSTOM ]
 then
     ./`cat PCUSTOM`
+    echo -e "--------------------------------------------------------"
+    echo -e "[$dirname] ${GRAY}Program exited with code: $?${NOCOLOR}"
     echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
+    echo -e "--------------------------------------------------------"
     exit
 fi
 
@@ -21,10 +27,14 @@ then
     cargo run
     if (( $? > 0 ))
     then
+        echo -e "--------------------------------------------------------"
         echo -e "[$dirname] ${RED}Run: FAILED${NOCOLOR}"
+        echo -e "--------------------------------------------------------"
         exit
     fi
+    echo -e "--------------------------------------------------------"
     echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
+    echo -e "--------------------------------------------------------"
     exit 
 fi
 
@@ -51,4 +61,7 @@ fi
 
 $directory/$filename
 
+echo -e "--------------------------------------------------------"
+echo -e "[$dirname] ${GRAY}Program exited with code: $?${NOCOLOR}"
 echo -e "[$dirname] ${CYAN}Run: Done${NOCOLOR}"
+echo -e "--------------------------------------------------------"

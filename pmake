@@ -31,7 +31,7 @@ then
         rm $dirname
     fi
     echo -e "[$dirname] ${CYAN}Build: Starting${NOCOLOR}"
-    as $dirname.s
+    gcc $dirname.s -c -g
 
     if (( $? > 0 ))
     then
@@ -39,14 +39,15 @@ then
         exit 1
     fi
 
-    ld -o $dirname a.out -nostdlib -static
+    ld -o $dirname $dirname.o -nostdlib -static
 
     if (( $? > 0 ))
     then
+        rm $dirname.o
         echo -e "[$dirname] ${RED}Build: Failed on linking${NOCOLOR}"
         exit 1
     fi
-    rm a.out
+    rm $dirname.o 
     echo -e "[$dirname] ${CYAN}Build: Done${NOCOLOR}"
 
 else
